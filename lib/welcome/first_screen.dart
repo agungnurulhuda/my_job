@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_jobb/design_system/colors.dart';
 import 'package:my_jobb/design_system/text_styles.dart';
-import 'package:my_jobb/sign_in.dart';
+import 'package:my_jobb/welcome/sign_in.dart';
+import 'package:my_jobb/welcome/sign_up.dart';
 import 'package:page_transition/page_transition.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -101,7 +102,15 @@ class WelcomeScreen extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(top: 16, bottom: 32),
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                duration: const Duration(milliseconds: 100),
+                                child: const SignUp(),
+                                type: PageTransitionType.fade,
+                              ));
+                        },
                         child: const Text(
                           'Register',
                           style: TextStyle(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:my_jobb/page_navbar/profile/create_new_password.dart';
 import 'package:my_jobb/design_system/colors.dart';
 import 'package:my_jobb/design_system/text_styles.dart';
 import 'package:my_jobb/home/home.dart';
+import 'package:my_jobb/welcome/sign_up.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignIn extends StatefulWidget {
@@ -23,15 +25,19 @@ class _SignInState extends State<SignIn> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                margin: const EdgeInsets.all(20),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
                     child: const Icon(
                       Iconsax.arrow_left_2,
                       size: 18,
+                      color: black,
                     ),
                     padding: const EdgeInsets.fromLTRB(10, 10, 12, 10),
                     decoration: ShapeDecoration(
@@ -43,11 +49,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                   ),
-                  const Text(
-                    'a',
-                    style: TextStyle(color: Colors.transparent),
-                  )
-                ],
+                ),
               ),
             ),
             Container(
@@ -61,8 +63,14 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(
                     height: 16,
                   ),
-                  StylesText.heading2SemiBold('Welcome back!'),
-                  StylesText.heading2SemiBold('to see you, Again')
+                  StylesText.heading2SemiBold(
+                    'Welcome back!',
+                    color: black,
+                  ),
+                  StylesText.heading2SemiBold(
+                    'to see you, Again',
+                    color: black,
+                  )
                 ],
               ),
             ),
@@ -101,7 +109,7 @@ class _SignInState extends State<SignIn> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  StylesText.heading4Medium('Email address'),
+                  StylesText.heading4Medium('Email address', color: black),
                   const SizedBox(
                     height: 12,
                   ),
@@ -127,12 +135,12 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(
                     height: 20,
                   ),
-                  StylesText.heading4Medium('Password'),
+                  StylesText.heading4Medium('Password', color: black),
                   const SizedBox(
                     height: 12,
                   ),
                   TextField(
-                    obscureText: true,
+                    obscureText: isLockPassword,
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.black,
@@ -142,15 +150,11 @@ class _SignInState extends State<SignIn> {
                       contentPadding: const EdgeInsets.fromLTRB(16, 18, 16, 18),
                       labelText: 'Enter your password',
                       enabledBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xFFE8ECF4)),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(12))),
+                          borderSide: BorderSide(color: Color(0xFFE8ECF4)),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
                       focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xFFE8ECF4)),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(12))),
+                          borderSide: BorderSide(color: Color(0xFFE8ECF4)),
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
                       labelStyle: const TextStyle(
                           color: Color(0xFF8391A1), fontSize: 14),
                       suffixIcon: InkWell(
@@ -170,8 +174,17 @@ class _SignInState extends State<SignIn> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           TextButton(
-                              onPressed: () {},
-                              child: StylesText.body2Regular(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      duration:
+                                          const Duration(milliseconds: 100),
+                                      child: const CreateNewPassword(),
+                                      type: PageTransitionType.fade,
+                                    ));
+                              },
+                              child: StylesText.body2Bold(
                                 'Forgot Password',
                                 color: primaryColor,
                               )),
@@ -222,8 +235,16 @@ class _SignInState extends State<SignIn> {
                     color: const Color(0xFF989898),
                   ),
                   TextButton(
-                      onPressed: () {},
-                      child: StylesText.body2Regular(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                              duration: const Duration(milliseconds: 100),
+                              child: const SignUp(),
+                              type: PageTransitionType.fade,
+                            ));
+                      },
+                      child: StylesText.body2Bold(
                         'Sign Up',
                         color: primaryColor,
                       ))

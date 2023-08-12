@@ -31,7 +31,7 @@ class _CreateReportState extends State<CreateReport> {
             color: black,
           ),
         ),
-        title: StylesText.heading4SemiBold('Work Report'),
+        title: StylesText.heading4SemiBold('Work Report', color: black),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -42,7 +42,7 @@ class _CreateReportState extends State<CreateReport> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      StylesText.heading4Medium('Title'),
+                      StylesText.heading4Medium('Title', color: black),
                       Container(
                         margin: const EdgeInsets.only(top: 8),
                         width: MediaQuery.of(context).size.width -
@@ -81,10 +81,8 @@ class _CreateReportState extends State<CreateReport> {
                             color: Colors.black,
                           ),
                           decoration: InputDecoration(
-                            floatingLabelBehavior:
-                                FloatingLabelBehavior.never,
-                            contentPadding:
-                                EdgeInsets.fromLTRB(16, 14, 16, 14),
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            contentPadding: EdgeInsets.fromLTRB(16, 14, 16, 14),
                             labelText: 'Example@gmail.com',
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide.none,
@@ -112,7 +110,8 @@ class _CreateReportState extends State<CreateReport> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                StylesText.heading4Medium('Title'),
+                                StylesText.heading4Medium('Location',
+                                    color: black),
                                 Container(
                                   margin: const EdgeInsets.only(top: 8),
                                   padding:
@@ -178,7 +177,8 @@ class _CreateReportState extends State<CreateReport> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                StylesText.heading4Medium('Shift'),
+                                StylesText.heading4Medium('Shift',
+                                    color: black),
                                 Container(
                                   margin: const EdgeInsets.only(top: 8),
                                   padding:
@@ -251,7 +251,7 @@ class _CreateReportState extends State<CreateReport> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        StylesText.heading4Medium('Description'),
+                        StylesText.heading4Medium('Description', color: black),
                         Container(
                           margin: const EdgeInsets.only(top: 8),
                           height: 108,
@@ -319,7 +319,7 @@ class _CreateReportState extends State<CreateReport> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        StylesText.heading4Medium('Constrant'),
+                        StylesText.heading4Medium('Constrant', color: black),
                         Container(
                           margin: const EdgeInsets.only(top: 8),
                           width: MediaQuery.of(context).size.width -
@@ -410,7 +410,8 @@ class _CreateReportState extends State<CreateReport> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Container(
-                                          margin: const EdgeInsets.only(bottom: 32),
+                                          margin:
+                                              const EdgeInsets.only(bottom: 32),
                                           height: 6,
                                           width: 88,
                                           decoration: BoxDecoration(
@@ -433,7 +434,8 @@ class _CreateReportState extends State<CreateReport> {
                                                   width: 4,
                                                 ),
                                                 StylesText.body1SemiBold(
-                                                    'Galery')
+                                                    'Galery',
+                                                    color: black)
                                               ],
                                             ),
                                             const SizedBox(
@@ -443,15 +445,15 @@ class _CreateReportState extends State<CreateReport> {
                                               children: [
                                                 const Icon(
                                                   Iconsax.camera5,
-                                                  color:
-                                                      Color(0xFF2F94FF),
+                                                  color: Color(0xFF2F94FF),
                                                   size: 32,
                                                 ),
                                                 const SizedBox(
                                                   width: 4,
                                                 ),
                                                 StylesText.body1SemiBold(
-                                                    'Camera')
+                                                    'Camera',
+                                                    color: black)
                                               ],
                                             )
                                           ],
@@ -470,7 +472,8 @@ class _CreateReportState extends State<CreateReport> {
                             const SizedBox(
                               height: 8,
                             ),
-                            StylesText.heading5SemiBold('Upload your image'),
+                            StylesText.heading5SemiBold('Upload your image',
+                                color: black),
                           ]),
                         ),
                       ),

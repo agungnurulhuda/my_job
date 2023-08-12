@@ -62,6 +62,11 @@ final TextStyle headlineMedium5 = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
 );
 
+final TextStyle headlineMedium6 = GoogleFonts.poppins(
+  fontSize: 12,
+  fontWeight: FontWeight.w500,
+);
+
 ////////////////////////////////////////
 /////// H E A D I N G - S E M I B O L D
 /////////////////////////////////////////
@@ -90,6 +95,11 @@ final TextStyle headlineSemiBold5 = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
 );
 
+final TextStyle headlineSemiBold6 = GoogleFonts.poppins(
+  fontSize: 12,
+  fontWeight: FontWeight.w600,
+);
+
 ////////////////////////////////////////
 /////// H E A D I N G - B O L D
 /////////////////////////////////////////
@@ -115,6 +125,11 @@ final TextStyle headlineBold4 = GoogleFonts.poppins(
 
 final TextStyle headlineBold5 = GoogleFonts.poppins(
   fontSize: 14,
+  fontWeight: FontWeight.w700,
+);
+
+final TextStyle headlineBold6 = GoogleFonts.poppins(
+  fontSize: 12,
   fontWeight: FontWeight.w700,
 );
 

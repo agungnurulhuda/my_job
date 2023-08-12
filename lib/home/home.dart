@@ -4,8 +4,8 @@ import 'package:my_jobb/page_navbar/create_report.dart';
 import 'package:my_jobb/design_system/colors.dart';
 import 'package:my_jobb/design_system/text_styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_jobb/page_navbar/history.dart';
-import 'package:my_jobb/page_navbar/profile.dart';
+import 'package:my_jobb/page_navbar/history/history.dart';
+import 'package:my_jobb/page_navbar/profile/profile.dart';
 import 'package:my_jobb/page_navbar/search.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -37,7 +37,10 @@ class _HomeState extends State<Home> {
         bucket: bucket,
       )),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Iconsax.add),
+        child: const Icon(
+          Iconsax.add,
+          size: 32,
+        ),
         backgroundColor: primaryColor,
         onPressed: () {
           Navigator.push(
@@ -257,11 +260,11 @@ class HomePage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StylesText.heading3SemiBold('Hi Agung 👋'),
+                    StylesText.heading3SemiBold('Hi Agung 👋', color: black),
                     const SizedBox(
                       height: 4,
                     ),
-                    StylesText.body3Regular('Welcome to My Job')
+                    StylesText.body3Regular('Welcome to My Job', color: black)
                   ],
                 ),
                 Row(
@@ -398,11 +401,11 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 32, left: 20, right: 20),
+            margin: const EdgeInsets.only(top: 24, left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                StylesText.heading4SemiBold('Latest Job'),
+                StylesText.heading4SemiBold('Latest Job', color: black),
                 Container(
                   decoration: BoxDecoration(
                       color: const Color(0xFFF3F3F3),
@@ -410,7 +413,7 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.all(8),
                   child: Row(
                     children: [
-                      StylesText.body2Regular('Sort by'),
+                      StylesText.body2Regular('Sort by', color: black),
                       const SizedBox(
                         width: 4,
                       ),
@@ -426,7 +429,7 @@ class HomePage extends StatelessWidget {
           ),
           Container(
             height: 125,
-            margin: const EdgeInsets.only(top: 20),
+            margin: const EdgeInsets.only(top: 16),
             child: ListView.separated(
                 separatorBuilder: (context, index) {
                   return const SizedBox(
@@ -526,15 +529,14 @@ class HomePage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   StylesText.heading4SemiBold(
-                                      latestJob[index][2]),
+                                      latestJob[index][2],
+                                      color: black),
                                   const SizedBox(height: 4),
-                                  StylesText.body3Regular(
-                                    latestJob[index][3],
-                                  ),
+                                  StylesText.body3Regular(latestJob[index][3],
+                                      color: black),
                                   const SizedBox(height: 8),
-                                  StylesText.body3Regular(
-                                    latestJob[index][4],
-                                  )
+                                  StylesText.body3Regular(latestJob[index][4],
+                                      color: black)
                                 ],
                               ),
                             ))
@@ -548,8 +550,8 @@ class HomePage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                StylesText.heading4SemiBold('News'),
-                StylesText.heading5Medium(
+                StylesText.heading4SemiBold('News', color: black),
+                StylesText.heading5Regular(
                   'View All',
                   color: primaryColor,
                 )
@@ -557,7 +559,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 20, bottom: 24),
+            margin: const EdgeInsets.only(top: 16, bottom: 24),
             child: SizedBox(
               height: 200,
               child: ListView.separated(
@@ -591,7 +593,8 @@ class HomePage extends StatelessWidget {
                           const SizedBox(
                             height: 8,
                           ),
-                          StylesText.heading4Medium(bannerNews[index][1]),
+                          StylesText.heading4Medium(bannerNews[index][1],
+                              color: black),
                         ],
                       ),
                     );
@@ -621,7 +624,7 @@ class MenuButton extends StatelessWidget {
         const SizedBox(
           height: 4,
         ),
-        StylesText.heading6Regular('Menu 1')
+        StylesText.heading6Regular('Menu 1', color: black)
       ],
     );
   }

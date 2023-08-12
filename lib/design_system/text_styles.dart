@@ -60,6 +60,10 @@ class StylesText extends StatelessWidget {
       {key, this.color = const Color(0xFF171717)})
       : style = headlineMedium5.copyWith(color: color);
 
+  StylesText.heading6Medium(this.text,
+      {key, this.color = const Color(0xFF171717)})
+      : style = headlineMedium6.copyWith(color: color);
+
 ///////////////////////////////
 ////// H E A D I N G - S E M I B O L D
 ///////////////////////////////
@@ -83,6 +87,10 @@ class StylesText extends StatelessWidget {
       {key, this.color = const Color(0xFF171717)})
       : style = headlineSemiBold5.copyWith(color: color);
 
+  StylesText.heading6SemiBold(this.text,
+      {key, this.color = const Color(0xFF171717)})
+      : style = headlineSemiBold6.copyWith(color: color);
+
 ///////////////////////////////
 ////// H E A D I N G - B O L D
 ///////////////////////////////
@@ -105,6 +113,10 @@ class StylesText extends StatelessWidget {
   StylesText.heading5Bold(this.text,
       {key, this.color = const Color(0xFF171717)})
       : style = headlineBold5.copyWith(color: color);
+
+  StylesText.heading6Bold(this.text,
+      {key, this.color = const Color(0xFF171717)})
+      : style = headlineBold6.copyWith(color: color);
 
 ///////////////////////////////
 ////// B O D Y - R E G U L A R
