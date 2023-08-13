@@ -4,9 +4,6 @@ import 'package:my_jobb/design_system/colors.dart';
 import 'package:my_jobb/design_system/text_styles.dart';
 import 'package:dotted_border/dotted_border.dart';
 
-String? chooseLocation = '';
-String? chooseShift = '';
-
 class CreateReport extends StatefulWidget {
   const CreateReport({Key? key}) : super(key: key);
 
@@ -15,8 +12,48 @@ class CreateReport extends StatefulWidget {
 }
 
 class _CreateReportState extends State<CreateReport> {
-  String location = 'Location';
-  String shift = 'Shift';
+  DropdownMenuItem<String> buildListLocation(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(color: black, fontSize: 14),
+        ),
+      );
+
+  DropdownMenuItem<String> buildListShift(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(color: black, fontSize: 14),
+        ),
+      );
+
+  List<String> locations = [
+    'Mantrijerona',
+    'Kraton',
+    'Mergangsan',
+    'Umbulharjo',
+    'Kotagede',
+    'Gondokusuman',
+    'Danurejan',
+    'Pakualaman',
+    'Gondomanan',
+    'Ngampilan'
+  ];
+
+  List<String> shifts = [
+    'Pagi',
+    'Siang',
+    'Sore',
+    'Malam',
+  ];
+
+  String? valueShift;
+  String? valueLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +81,7 @@ class _CreateReportState extends State<CreateReport> {
           child: Container(
               margin: const EdgeInsets.fromLTRB(20, 24, 24, 24),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,326 +145,156 @@ class _CreateReportState extends State<CreateReport> {
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                StylesText.heading4Medium('Location',
-                                    color: black),
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      // isPickMatkul = true;
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            actionsPadding:
-                                                const EdgeInsets.fromLTRB(
-                                                    16, 0, 16, 4),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(16)),
-                                            elevation: 10,
-                                            scrollable: true,
-                                            title: const Text(
-                                              'Choose Location',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            content:
-                                                const SingleChildScrollView(
-                                              // child: Center()
-                                              child: ChooseLocation(),
-                                            ),
-                                            actions: <Widget>[
-                                              OutlinedButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      4, 2, 4, 2),
-                                                  child: Text(
-                                                    'Batal',
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: primaryColor),
-                                                  ),
-                                                ),
-                                                style: OutlinedButton.styleFrom(
-                                                    side: const BorderSide(
-                                                        color: primaryColor,
-                                                        width: 1.0)),
-                                              ),
-                                              const SizedBox(
-                                                width: 2,
-                                              ),
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary:
-                                                      primaryColor, // Ubah warna latar belakang di sini
-                                                ),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    location = chooseLocation!;
-                                                  });
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 3), () {
-                                                    setState(() {
-                                                      // isLoading = false;
-                                                    });
-                                                  });
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      4, 2, 4, 2),
-                                                  child: Text(
-                                                    'Pilih',
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.white),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    });
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.only(top: 8),
-                                    padding: const EdgeInsets.fromLTRB(
-                                        16, 14, 16, 14),
-                                    width: MediaQuery.of(context).size.width -
-                                        (MediaQuery.of(context).size.width *
-                                            0.5) -
-                                        (MediaQuery.of(context).size.width *
-                                            0.08),
-                                    decoration: ShapeDecoration(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                            width: 0.50,
-                                            color: Color(0xFFECEEF2)),
-                                        borderRadius: BorderRadius.circular(12),
+                        Expanded(
+                          flex: 5,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              StylesText.heading4Medium('Location',
+                                  color: black),
+                              Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                  margin: const EdgeInsets.only(top: 8),
+                                  width: MediaQuery.of(context).size.width -
+                                      (MediaQuery.of(context).size.width * 0.1),
+                                  decoration: ShapeDecoration(
+                                    color: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      side: const BorderSide(
+                                          width: 0.50,
+                                          color: Color(0xFFECEEF2)),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    shadows: const [
+                                      BoxShadow(
+                                        color: Color(0x087281DF),
+                                        blurRadius: 4.11,
+                                        offset: Offset(0, 0.52),
+                                        spreadRadius: 0,
                                       ),
-                                      shadows: const [
-                                        BoxShadow(
-                                          color: Color(0x087281DF),
-                                          blurRadius: 4.11,
-                                          offset: Offset(0, 0.52),
-                                          spreadRadius: 0,
-                                        ),
-                                        BoxShadow(
-                                          color: Color(0x0C7281DF),
-                                          blurRadius: 6.99,
-                                          offset: Offset(0, 1.78),
-                                          spreadRadius: 0,
-                                        ),
-                                        BoxShadow(
-                                          color: Color(0x0F7281DF),
-                                          blurRadius: 10.20,
-                                          offset: Offset(0, 4.11),
-                                          spreadRadius: 0,
-                                        )
-                                      ],
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            location,
-                                            style: TextStyle(
-                                              color: location == 'Location'
-                                                  ? grey
-                                                  : black,
-                                            ),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        const Icon(
-                                          Icons.arrow_drop_down_rounded,
-                                          color: black,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                StylesText.heading4Medium('Shift',
-                                    color: black),
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      // isPickMatkul = true;
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            actionsPadding:
-                                                const EdgeInsets.fromLTRB(
-                                                    16, 0, 16, 4),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(16)),
-                                            elevation: 10,
-                                            scrollable: true,
-                                            title: const Text(
-                                              'Choose Shift',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            content:
-                                                const SingleChildScrollView(
-                                              // child: Center()
-                                              child: ChooseShift(),
-                                            ),
-                                            actions: <Widget>[
-                                              OutlinedButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      4, 2, 4, 2),
-                                                  child: Text(
-                                                    'Batal',
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: primaryColor),
-                                                  ),
-                                                ),
-                                                style: OutlinedButton.styleFrom(
-                                                    side: const BorderSide(
-                                                        color: primaryColor,
-                                                        width: 1.0)),
-                                              ),
-                                              const SizedBox(
-                                                width: 2,
-                                              ),
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                    primary:
-                                                        primaryColor // Ubah warna latar belakang di sini
-                                                    ),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    shift = chooseShift!;
-                                                  });
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 3), () {
-                                                    setState(() {
-                                                      // isLoading = false;
-                                                    });
-                                                  });
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      4, 2, 4, 2),
-                                                  child: Text(
-                                                    'Pilih',
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.white),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    });
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.only(top: 8),
-                                    padding: const EdgeInsets.fromLTRB(
-                                        16, 14, 16, 14),
-                                    width: MediaQuery.of(context).size.width -
-                                        (MediaQuery.of(context).size.width *
-                                            0.5) -
-                                        (MediaQuery.of(context).size.width *
-                                            0.08),
-                                    decoration: ShapeDecoration(
-                                      color: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                            width: 0.50,
-                                            color: Color(0xFFECEEF2)),
-                                        borderRadius: BorderRadius.circular(12),
+                                      BoxShadow(
+                                        color: Color(0x0C7281DF),
+                                        blurRadius: 6.99,
+                                        offset: Offset(0, 1.78),
+                                        spreadRadius: 0,
                                       ),
-                                      shadows: const [
-                                        BoxShadow(
-                                          color: Color(0x087281DF),
-                                          blurRadius: 4.11,
-                                          offset: Offset(0, 0.52),
-                                          spreadRadius: 0,
-                                        ),
-                                        BoxShadow(
-                                          color: Color(0x0C7281DF),
-                                          blurRadius: 6.99,
-                                          offset: Offset(0, 1.78),
-                                          spreadRadius: 0,
-                                        ),
-                                        BoxShadow(
-                                          color: Color(0x0F7281DF),
-                                          blurRadius: 10.20,
-                                          offset: Offset(0, 4.11),
-                                          spreadRadius: 0,
-                                        )
-                                      ],
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: Text(
-                                            shift,
-                                            style: TextStyle(
-                                              color: shift == 'Shift'
-                                                  ? grey
-                                                  : black,
-                                            ),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        const Icon(
-                                          Icons.arrow_drop_down_rounded,
-                                          color: black,
-                                        )
-                                      ],
-                                    ),
+                                      BoxShadow(
+                                        color: Color(0x0F7281DF),
+                                        blurRadius: 10.20,
+                                        offset: Offset(0, 4.11),
+                                        spreadRadius: 0,
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                          ],
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      borderRadius: BorderRadius.circular(12),
+                                      hint: const Text(
+                                        'Location',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: grey, fontSize: 14),
+                                      ),
+                                      isExpanded: true,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                      iconSize: 32,
+                                      icon: const Icon(
+                                        Icons.arrow_drop_down_rounded,
+                                        color: black,
+                                      ),
+                                      value: valueLocation,
+                                      items: locations
+                                          .map(buildListLocation)
+                                          .toList(),
+                                      onChanged: (value) => setState(() {
+                                        this.valueLocation = value;
+                                      }),
+                                    ),
+                                  )),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              StylesText.heading4Medium('Shift', color: black),
+                              Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                  margin: const EdgeInsets.only(top: 8),
+                                  width: MediaQuery.of(context).size.width -
+                                      (MediaQuery.of(context).size.width * 0.1),
+                                  decoration: ShapeDecoration(
+                                    color: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      side: const BorderSide(
+                                          width: 0.50,
+                                          color: Color(0xFFECEEF2)),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    shadows: const [
+                                      BoxShadow(
+                                        color: Color(0x087281DF),
+                                        blurRadius: 4.11,
+                                        offset: Offset(0, 0.52),
+                                        spreadRadius: 0,
+                                      ),
+                                      BoxShadow(
+                                        color: Color(0x0C7281DF),
+                                        blurRadius: 6.99,
+                                        offset: Offset(0, 1.78),
+                                        spreadRadius: 0,
+                                      ),
+                                      BoxShadow(
+                                        color: Color(0x0F7281DF),
+                                        blurRadius: 10.20,
+                                        offset: Offset(0, 4.11),
+                                        spreadRadius: 0,
+                                      )
+                                    ],
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      borderRadius: BorderRadius.circular(12),
+                                      hint: const Text(
+                                        'Shift',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: grey, fontSize: 14),
+                                      ),
+                                      isExpanded: true,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                      iconSize: 32,
+                                      icon: const Icon(
+                                        Icons.arrow_drop_down_rounded,
+                                        color: black,
+                                      ),
+                                      value: valueShift,
+                                      items:
+                                          shifts.map(buildListShift).toList(),
+                                      onChanged: (value) => setState(() {
+                                        this.valueShift = value;
+                                      }),
+                                    ),
+                                  )),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -688,144 +556,6 @@ class _CreateReportState extends State<CreateReport> {
                   ),
                 ],
               ))),
-    );
-  }
-}
-
-class ChooseLocation extends StatefulWidget {
-  const ChooseLocation({Key? key}) : super(key: key);
-
-  @override
-  State<ChooseLocation> createState() => _ChooseLocationState();
-}
-
-class _ChooseLocationState extends State<ChooseLocation> {
-  List locations = [
-    'Mantrijeron',
-    'Kraton',
-    'Mergangsan',
-    'Umbulharjo',
-    'Kotagede',
-    'Gondokusuman',
-    'Danurejan',
-    'Pakualaman',
-    'Gondomanan',
-    'Ngampilan'
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 280,
-      child: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              padding: const EdgeInsets.fromLTRB(12, 2, 0, 2),
-              decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFE5E7EB)),
-                  borderRadius: BorderRadius.circular(8)),
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: -2),
-                dense: true,
-                trailing: Radio<String>(
-                  activeColor: primaryColor,
-                  value: locations[index],
-                  groupValue: chooseLocation,
-                  onChanged: (String? value) {
-                    setState(() {
-                      chooseLocation = value;
-                      showSnackbar();
-                    });
-                  },
-                ),
-                title: Text(
-                  locations[index],
-                  style: const TextStyle(fontSize: 14),
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(
-              height: 8,
-            ); // Memisahkan setiap elemen dengan garis pemisah
-          },
-          itemCount: locations.length),
-    );
-  }
-
-  void showSnackbar() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$chooseLocation selected'),
-        duration: const Duration(seconds: 1),
-      ),
-    );
-  }
-}
-
-class ChooseShift extends StatefulWidget {
-  const ChooseShift({Key? key}) : super(key: key);
-
-  @override
-  State<ChooseShift> createState() => _ChooseShiftState();
-}
-
-class _ChooseShiftState extends State<ChooseShift> {
-  List shift = [
-    'Pagi (08.00 - 12.00)',
-    'Siang (12.00 - 15.00)',
-    'Sore (15.00 - 18.00)',
-    'Malam (18.00 - 23.00)',
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 280,
-      child: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              padding: const EdgeInsets.fromLTRB(12, 2, 0, 2),
-              decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFE5E7EB)),
-                  borderRadius: BorderRadius.circular(8)),
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: -2),
-                dense: true,
-                trailing: Radio<String>(
-                  activeColor: primaryColor,
-                  value: shift[index],
-                  groupValue: chooseShift,
-                  onChanged: (String? value) {
-                    setState(() {
-                      chooseShift = value;
-                      showSnackbar();
-                    });
-                  },
-                ),
-                title: Text(
-                  shift[index],
-                  style: const TextStyle(fontSize: 14),
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(
-              height: 8,
-            ); // Memisahkan setiap elemen dengan garis pemisah
-          },
-          itemCount: shift.length),
-    );
-  }
-
-  void showSnackbar() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$chooseShift selected'),
-        duration: const Duration(seconds: 1),
-      ),
     );
   }
 }

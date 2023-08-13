@@ -224,7 +224,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                               ));
                         },
                         child: const Text(
-                          'Sign up',
+                          'Change password',
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
