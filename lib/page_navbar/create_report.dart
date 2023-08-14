@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
 import 'package:my_jobb/design_system/colors.dart';
 import 'package:my_jobb/design_system/text_styles.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -12,26 +13,6 @@ class CreateReport extends StatefulWidget {
 }
 
 class _CreateReportState extends State<CreateReport> {
-  DropdownMenuItem<String> buildListLocation(String item) => DropdownMenuItem(
-        value: item,
-        child: Text(
-          item,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(color: black, fontSize: 14),
-        ),
-      );
-
-  DropdownMenuItem<String> buildListShift(String item) => DropdownMenuItem(
-        value: item,
-        child: Text(
-          item,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(color: black, fontSize: 14),
-        ),
-      );
-
   List<String> locations = [
     'Mantrijerona',
     'Kraton',
@@ -52,8 +33,44 @@ class _CreateReportState extends State<CreateReport> {
     'Malam',
   ];
 
+  String formattedDate = DateFormat('EEE d MMM y').format(DateTime.now());
+  bool isPickDate = false;
   String? valueShift;
   String? valueLocation;
+
+  DropdownMenuItem<String> buildListLocation(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(color: black, fontSize: 14),
+        ),
+      );
+
+  DropdownMenuItem<String> buildListShift(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(color: black, fontSize: 14),
+        ),
+      );
+
+  void _showDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(200),
+            lastDate: DateTime(2025))
+        .then((value) {
+      setState(() {
+        formattedDate = DateFormat('EEE d MMM y').format(value!);
+        isPickDate = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +224,7 @@ class _CreateReportState extends State<CreateReport> {
                                       iconSize: 32,
                                       icon: const Icon(
                                         Icons.arrow_drop_down_rounded,
-                                        color: black,
+                                        color: black2,
                                       ),
                                       value: valueLocation,
                                       items: locations
@@ -283,7 +300,7 @@ class _CreateReportState extends State<CreateReport> {
                                       iconSize: 32,
                                       icon: const Icon(
                                         Icons.arrow_drop_down_rounded,
-                                        color: black,
+                                        color: black2,
                                       ),
                                       value: valueShift,
                                       items:
@@ -294,6 +311,74 @@ class _CreateReportState extends State<CreateReport> {
                                     ),
                                   )),
                             ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        StylesText.heading4Medium('Date', color: black),
+                        Container(
+                          padding: EdgeInsets.only(
+                              left: 16, top: 10, right: 16, bottom: 10),
+                          margin: const EdgeInsets.only(top: 8),
+                          width: MediaQuery.of(context).size.width -
+                              (MediaQuery.of(context).size.width * 0.1),
+                          decoration: ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  width: 0.50, color: Color(0xFFECEEF2)),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            shadows: const [
+                              BoxShadow(
+                                color: Color(0x087281DF),
+                                blurRadius: 4.11,
+                                offset: Offset(0, 0.52),
+                                spreadRadius: 0,
+                              ),
+                              BoxShadow(
+                                color: Color(0x0C7281DF),
+                                blurRadius: 6.99,
+                                offset: Offset(0, 1.78),
+                                spreadRadius: 0,
+                              ),
+                              BoxShadow(
+                                color: Color(0x0F7281DF),
+                                blurRadius: 10.20,
+                                offset: Offset(0, 4.11),
+                                spreadRadius: 0,
+                              )
+                            ],
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              _showDatePicker();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '$formattedDate',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: isPickDate ? black : grey,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                Icon(
+                                  Icons.arrow_right_rounded,
+                                  color: black2,
+                                  size: 32,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

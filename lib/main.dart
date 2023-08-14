@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_jobb/design_system/colors.dart';
 import 'package:my_jobb/page_navbar/create_report.dart';
 import 'package:my_jobb/welcome/splash_screen.dart';
 
@@ -11,9 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.pink),
       title: 'My Job',
-      home: SplashScreen(),
+      home: CreateReport(),
     );
   }
 }
